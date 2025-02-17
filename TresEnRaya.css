@@ -1,0 +1,105 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: white;
+}
+
+.cabecera {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 100%;
+    height: 80px;
+    background-color: #000;
+    color: white;
+    font-size: 2em;
+    font-family: Arial, sans-serif;
+    margin-bottom: 100px;
+}
+
+.marcador-contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 20px;
+}
+
+.marcador {
+    background-color: yellow;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.skip-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.skip-button:hover {
+    background-color: darkred;
+}
+
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.espacio {
+    width: 420px;
+    height: 80px;
+    background-color: yellow;
+    margin-bottom: 10px;
+}
+
+.contenido {
+    display: flex;
+}
+
+.espacio.izquierda {
+    width: 80px;
+    height: 420px;
+    background-color: yellow;
+    margin-right: 10px;
+}
+
+.tablero {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: repeat(4, 100px);
+    gap: 5px;
+    background-color: #000;
+    padding: 5px;
+}
+
+.celda {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+}
+
+.fuera {
+    background-color: red;
+}
+
+.dentro {
+    background-color: green;
+}
