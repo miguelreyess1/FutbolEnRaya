@@ -1,6 +1,7 @@
 -- 1) Crea la base de datos (o usa la que quieras)
-CREATE DATABASE IF NOT EXISTS TresEnRaya;
-USE TikiTakaDB;
+
+CREATE DATABASE IF NOT EXISTS FutbolEnRaya;
+USE FutbolEnRaya;
 
 -- 2) Crea las tablas
 DROP TABLE IF EXISTS player_clubs;
@@ -35,141 +36,96 @@ CREATE TABLE player_clubs (
 
 -- 3) Insertar nacionalidades necesarias
 INSERT IGNORE INTO nationalities (name) VALUES
-('Portugal'),
-('France'),
-('Argentina'),
-('Spain'),
-('Wales'),
-('Netherlands');
+('España'),
+('Francia'),
+('Portugal');
 
 -- 4) Insertar clubes necesarios
 INSERT IGNORE INTO clubs (name) VALUES
-('Sporting CP'),
-('Manchester United'),
 ('Real Madrid'),
-('Juventus'),
-('Al Nassr'),
-('Lyon'),
-('Al Ittihad'),
-('Newell''s Old Boys'),
 ('Barcelona'),
-('PSG'),
-('Inter Miami'),
-('Vissel Kobe'),
-('Emirates Club'),
-('Sevilla'),
-('Southampton'),
-('Tottenham Hotspur'),
-('LAFC'),
-('Groningen'),
-('PSV'),
-('Chelsea'),
-('Bayern Munich');
+('Atletico de Madrid');
+
 
 -- 5) Insertar jugadores (1 nacionalidad cada uno)
 -- Usamos subconsultas para no depender de IDs fijos
 
--- Cristiano Ronaldo
 INSERT IGNORE INTO players (name, nationality_id)
-SELECT 'Cristiano Ronaldo', n.id
+SELECT 'Dani Carvajal', n.id
+FROM nationalities n
+WHERE n.name = 'España'
+LIMIT 1;
+
+INSERT IGNORE INTO players (name, nationality_id)
+SELECT 'Eduardo Camavinga', n.id
+FROM nationalities n
+WHERE n.name = 'Francia'
+LIMIT 1;
+
+INSERT IGNORE INTO players (name, nationality_id)
+SELECT 'Luis Figo', n.id
 FROM nationalities n
 WHERE n.name = 'Portugal'
 LIMIT 1;
 
--- Karim Benzema
 INSERT IGNORE INTO players (name, nationality_id)
-SELECT 'Karim Benzema', n.id
+SELECT 'Griezmann', n.id
 FROM nationalities n
-WHERE n.name = 'France'
+WHERE n.name = 'Francia'
 LIMIT 1;
 
--- Lionel Messi
 INSERT IGNORE INTO players (name, nationality_id)
-SELECT 'Lionel Messi', n.id
+SELECT 'Joao Felix', n.id
 FROM nationalities n
-WHERE n.name = 'Argentina'
+WHERE n.name = 'Portugal'
 LIMIT 1;
 
--- Andres Iniesta
 INSERT IGNORE INTO players (name, nationality_id)
-SELECT 'Andres Iniesta', n.id
+SELECT 'Koke', n.id
 FROM nationalities n
-WHERE n.name = 'Spain'
-LIMIT 1;
-
--- Sergio Ramos
-INSERT IGNORE INTO players (name, nationality_id)
-SELECT 'Sergio Ramos', n.id
-FROM nationalities n
-WHERE n.name = 'Spain'
-LIMIT 1;
-
--- Gareth Bale
-INSERT IGNORE INTO players (name, nationality_id)
-SELECT 'Gareth Bale', n.id
-FROM nationalities n
-WHERE n.name = 'Wales'
-LIMIT 1;
-
--- Arjen Robben
-INSERT IGNORE INTO players (name, nationality_id)
-SELECT 'Arjen Robben', n.id
-FROM nationalities n
-WHERE n.name = 'Netherlands'
+WHERE n.name = 'España'
 LIMIT 1;
 
 -- 6) Relacionar cada jugador con sus clubes en la tabla intermedia
 
--- Cristiano Ronaldo
 INSERT IGNORE INTO player_clubs (player_id, club_id)
 SELECT p.id, c.id
 FROM players p, clubs c
-WHERE p.name = 'Cristiano Ronaldo'
-  AND c.name IN ('Sporting (Portugal)', 'Manchester United', 'Real Madrid', 'Juventus', 'Al Nassr');
+WHERE p.name = 'Dani Carvajal'
+  AND c.name IN ('Real Madrid');
 
--- Karim Benzema
 INSERT IGNORE INTO player_clubs (player_id, club_id)
 SELECT p.id, c.id
 FROM players p, clubs c
-WHERE p.name = 'Karim Benzema'
-  AND c.name IN ('Lyon', 'Real Madrid', 'Al Ittihad');
+WHERE p.name = 'Eduardo Camavinga'
+  AND c.name IN ('Real Madrid');
 
--- Lionel Messi
 INSERT IGNORE INTO player_clubs (player_id, club_id)
 SELECT p.id, c.id
 FROM players p, clubs c
-WHERE p.name = 'Lionel Messi'
-  AND c.name IN ('Newell''s Old Boys', 'Barcelona', 'PSG', 'Inter Miami');
-
--- Andres Iniesta
-INSERT IGNORE INTO player_clubs (player_id, club_id)
+WHERE p.name = 'Luis Figo'
+  AND c.name IN ('Real Madrid', 'Barcelona');
+  
+  INSERT IGNORE INTO player_clubs (player_id, club_id)
 SELECT p.id, c.id
 FROM players p, clubs c
-WHERE p.name = 'Andres Iniesta'
-  AND c.name IN ('Barcelona', 'Vissel Kobe', 'Emirates Club');
-
--- Sergio Ramos
-INSERT IGNORE INTO player_clubs (player_id, club_id)
+WHERE p.name = 'Griezmann'
+  AND c.name IN ('Atletico Madrid', 'Barcelona');
+  
+    INSERT IGNORE INTO player_clubs (player_id, club_id)
 SELECT p.id, c.id
 FROM players p, clubs c
-WHERE p.name = 'Sergio Ramos'
-  AND c.name IN ('Sevilla', 'Real Madrid', 'PSG');
-
--- Gareth Bale
-INSERT IGNORE INTO player_clubs (player_id, club_id)
+WHERE p.name = 'Joao Felix'
+  AND c.name IN ('Atletico Madrid', 'Barcelona');
+  
+    INSERT IGNORE INTO player_clubs (player_id, club_id)
 SELECT p.id, c.id
 FROM players p, clubs c
-WHERE p.name = 'Gareth Bale'
-  AND c.name IN ('Southampton', 'Tottenham Hotspur', 'Real Madrid', 'LAFC');
-
--- Arjen Robben
-INSERT IGNORE INTO player_clubs (player_id, club_id)
-SELECT p.id, c.id
-FROM players p, clubs c
-WHERE p.name = 'Arjen Robben'
-  AND c.name IN ('Groningen', 'PSV', 'Chelsea', 'Real Madrid', 'Bayern Munich');
+WHERE p.name = 'Koke'
+  AND c.name IN ('Atletico Madrid');
 
 -- ¡Listo! Revisa los datos:
-SELECT * FROM players;
+-- SELECT * FROM players;
 -- SELECT * FROM clubs;
 -- SELECT * FROM player_clubs;
+
