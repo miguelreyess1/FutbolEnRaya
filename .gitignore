@@ -1,0 +1,13 @@
+# Ignorar archivos y carpetas innecesarias
+.android/
+.gradle/
+.eclipse/
+.vscode/
+.DS_Store
+.idea/
+*.log
+node_modules/
+
+# git add .
+# git commit -m "Descripción del cambio"
+# git push
