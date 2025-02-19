@@ -1,7 +1,21 @@
 [
   {
-    "name": "Julián Álvarez",
-    "nationality": "Argentina",
+    "name": "Koke",
+    "nationality": "España",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Samuel Lino",
+    "nationality": "Brasil",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Pablo Barrios",
+    "nationality": "España",
     "clubs": [
       "Atlético Madrid"
     ]
