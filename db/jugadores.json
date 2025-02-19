@@ -1,18 +1,18 @@
 [
     {
-      "name": "Sergio Ramos",
+      "name": "Dani Carvajal",
       "nationality": "Spain",
-      "clubs": ["Sevilla", "Real Madrid"]
-    },
-    {
-      "name": "Luka Modric",
-      "nationality": "Croatia",
       "clubs": ["Real Madrid"]
     },
     {
-      "name": "Antoine Griezmann",
+      "name": "Lamine Yamal",
+      "nationality": "Spain",
+      "clubs": ["FC Barcelona"]
+    },
+    {
+      "name": "Clement Lenglet",
       "nationality": "France",
-      "clubs": ["Real Sociedad", "Atletico Madrid", "FC Barcelona"]
+      "clubs": ["Atletico Madrid", "FC Barcelona"]
     }
-  ]
+]
   
