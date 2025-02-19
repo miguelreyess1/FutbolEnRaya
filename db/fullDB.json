@@ -21,29 +21,8 @@
     ]
   },
   {
-    "name": "Ferran Torres",
-    "nationality": "España",
-    "clubs": [
-      "FC Barcelona"
-    ]
-  },
-  {
-    "name": "Pau Torres",
-    "nationality": "España",
-    "clubs": [
-      "FC Barcelona"
-    ]
-  },
-  {
     "name": "Raphina",
     "nationality": "Brasil",
-    "clubs": [
-      "FC Barcelona"
-    ]
-  },
-  {
-    "name": "Pedri",
-    "nationality": "España",
     "clubs": [
       "FC Barcelona"
     ]
@@ -100,13 +79,6 @@
   {
     "name": "Ronald Araujo",
     "nationality": "Uruguay",
-    "clubs": [
-      "FC Barcelona"
-    ]
-  },
-  {
-    "name": "Jules Koundé",
-    "nationality": "Francia",
     "clubs": [
       "FC Barcelona"
     ]
@@ -316,7 +288,7 @@
   },
   {
     "name": "Thibaut Courtois",
-    "nationality": "Bélgica",
+    "nationality": "Belgica",
     "clubs": [
       "Real Madrid"
     ]
@@ -417,6 +389,490 @@
     "nationality": "España",
     "clubs": [
       "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Rodrigo Riquelme",
+    "nationality": "España",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Thomas Lemar",
+    "nationality": "Francia",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Nahuel Molina",
+    "nationality": "Argentina",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Clément Lenglet",
+    "nationality": "Francia",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Axel Witsel",
+    "nationality": "Belgica",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "José María Giménez",
+    "nationality": "Uruguay",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "César Azpilicueta",
+    "nationality": "España",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Robin Le Normand",
+    "nationality": "España",
+    "clubs": [
+      "Real Sociedad"
+    ]
+  },
+  {
+    "name": "Reinildo Mandava",
+    "nationality": "Mozambique",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Javi Galán",
+    "nationality": "España",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Ilias Kostis",
+    "nationality": "Grecia",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Jan Oblak",
+    "nationality": "Eslovenia",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Juan Musso",
+    "nationality": "Argentina",
+    "clubs": [
+      "Atlético Madrid"
+    ]
+  },
+  {
+    "name": "Gorka Guruzeta",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Maroan Sannadi",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Álvaro Djaló",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Nico Williams",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Iñaki Williams",
+    "nationality": "Ghana",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Oihan Sancet",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Álex Berenguer",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Iñigo Ruiz de Galarreta",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Unai Gómez",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Beñat Prados",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Mikel Jauregizar",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Mikel Vesga",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Daniel Vivian",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Yuri Berchiche",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Yeray Álvarez",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Aitor Paredes",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Óscar de Marcos",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Unai Nuñez",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Andoni Gorosabel",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club",
+      "Real Sociedad",
+      "Alaves"
+    ]
+  },
+  {
+    "name": "Adama Boiro",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": " Iñigo Lekue",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Unai Simón",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": "Julen Agirrezabala",
+    "nationality": "España",
+    "clubs": [
+      "Athletic Club"
+    ]
+  },
+  {
+    "name": " Nicolas Pépé",
+    "nationality": "Costa de Marfil",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Thierno Barry",
+    "nationality": "Francia",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Ayoze Pérez",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Betis"
+    ]
+  },
+  {
+    "name": "Gerard Moreno",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Espanyol",
+      "Mallorca"
+    ]
+  },
+  {
+    "name": "lias Akhomach",
+    "nationality": "Marruecos",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Pape Gueye",
+    "nationality": "Senegal",
+    "clubs": [
+      "Villareal",
+      "Sevilla"
+    ]
+  },
+  {
+    "name": "Alejandro Baena",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Girona"
+    ]
+  },
+  {
+    "name": "Ilias Akhomach",
+    "nationality": "Marruecos",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Yeremi Pino",
+    "nationality": "España",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Dani Parejo",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Valencia",
+      "Getafe",
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Denis Suarez",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Celta de Vigo",
+      "FC Barcelona",
+      "Espanyol",
+      "Sevilla"
+    ]
+  },
+  {
+    "name": "Santi Comesaña",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Rayo Vallecano"
+    ]
+  },
+  {
+    "name": "Juan Foyth",
+    "nationality": "Argentina",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Willy Kambwala",
+    "nationality": "Francia",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Tajon Buchanan",
+    "nationality": "Canada",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Eric Bailly",
+    "nationality": "Costa de Marfil",
+    "clubs": [
+      "Villareal",
+      "Espanyol"
+    ]
+  },
+  {
+    "name": "Raul Albiol",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Real Madrid",
+      "Getafe",
+      "Valencia"
+    ]
+  },
+  {
+    "name": "Logan Costa",
+    "nationality": "Cabo Verde",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Sergi Cardona",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Las Palmas"
+    ]
+  },
+  {
+    "name": "Alfonso Pedraza",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Betis",
+      "Alaves"
+    ]
+  },
+  {
+    "name": "Kiko Femenia",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Alaves"
+    ]
+  },
+  {
+    "name": "Pau Navarro",
+    "nationality": "España",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Luiz Junior",
+    "nationality": "Brasil",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Diego Conde",
+    "nationality": "España",
+    "clubs": [
+      "Villareal",
+      "Atlético Madrid",
+      "Leganes",
+      "Getafe"
+    ]
+  },
+  {
+    "name": "Iker Alvarez",
+    "nationality": "Andorra",
+    "clubs": [
+      "Villareal"
+    ]
+  },
+  {
+    "name": "Pau Victor",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Ferran Torres",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona",
+      "Valencia"
+    ]
+  },
+  {
+    "name": "Pedri",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona",
+      "Las Palmas"
+    ]
+  },
+  {
+    "name": "Jules Kounde",
+    "nationality": "Francia",
+    "clubs": [
+      "FC Barcelona",
+      "Sevilla"
     ]
   }
 ]

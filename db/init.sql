@@ -43,3 +43,29 @@ UNIQUE (name, nationality_id);
 select * from players;
 select * from clubs;
 select * from nationalities;
+
+use futbolenraya;
+UPDATE players
+SET nationality_id = (
+  SELECT id FROM nationalities WHERE name = 'Spain'
+)
+WHERE name = 'Eric García';
+
+-- 1) Eliminar las relaciones en player_clubs
+SELECT p.name AS player_name,
+       n.name AS nationality
+FROM players p
+JOIN nationalities n ON p.nationality_id = n.id
+WHERE p.name = 'Luka Modric';
+
+
+select * from clubs;
+
+DELETE pc
+FROM player_clubs pc
+JOIN players p ON pc.player_id = p.id
+WHERE p.name = 'lias Akhomach';
+
+-- 2) Eliminar al jugador de la tabla players
+DELETE FROM players
+WHERE name = 'lias Akhomach';

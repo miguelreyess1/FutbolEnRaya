@@ -3,102 +3,134 @@ const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql2/promise");
 
-// Ajusta credenciales de tu BD
 const dbConfig = {
   host: "localhost",
   user: "root",
-  password: "root",       // tu password, si corresponde
+  password: "root",
   database: "futbolenraya"
 };
 
 const app = express();
-app.use(cors());            // Permite peticiones desde el frontend
-app.use(express.json());    // Para parsear JSON en POST
+app.use(cors());
+app.use(express.json());
 
-// 1) Endpoint: generar las etiquetas (3 columnas, 3 filas)
 app.get("/generate-board", async (req, res) => {
+  let conn;
   try {
-    const conn = await mysql.createConnection(dbConfig);
+    conn = await mysql.createConnection(dbConfig);
+    let isValid = false;
+    let attempts = 0;
 
-    // a) Seleccionamos 3 clubes aleatorios
-    const [clubs] = await conn.execute(`
-      SELECT name 
-      FROM clubs
-      ORDER BY RAND()
-      LIMIT 3
-    `);
+    while (!isValid && attempts < 50) {
+      attempts++;
+      
+      const clubLimit = 3 + Math.floor(Math.random() * 2);
+      const nationLimit = 3 + Math.floor(Math.random() * 2);
+      
+      const [clubs] = await conn.execute(`
+        SELECT name FROM clubs 
+        ORDER BY RAND() 
+        LIMIT ${clubLimit}
+      `);
+      
+      const [nations] = await conn.execute(`
+        SELECT name FROM nationalities
+        ORDER BY RAND()
+        LIMIT ${nationLimit}
+      `);
 
-    // b) Seleccionamos 3 nacionalidades aleatorias
-    const [nations] = await conn.execute(`
-      SELECT name
-      FROM nationalities
-      ORDER BY RAND()
-      LIMIT 3
-    `);
+      // Verificar combinaciones
+      const combinations = clubs.flatMap(c => 
+        nations.map(n => [c.name, n.name])
+      );
 
-    // OPCIONAL: Verificar que cada intersección (club, nacionalidad)
-    // tenga al menos 1 jugador. Si no, podrías reintentar.
-    // Aquí, por simplicidad, devolvemos lo que salga.
+      const validCombinations = await Promise.all(
+        combinations.map(async ([club, nation]) => {
+          const [rows] = await conn.execute(
+            `SELECT COUNT(*) AS count 
+             FROM players p
+             JOIN nationalities n ON n.id = p.nationality_id
+             JOIN player_clubs pc ON pc.player_id = p.id
+             JOIN clubs c ON c.id = pc.club_id
+             WHERE c.name = ? AND n.name = ?`,
+            [club, nation]
+          );
+          return rows[0].count > 0;
+        })
+      );
+      isValid = validCombinations.every(Boolean);
+      
+      if (isValid) {
+        await conn.end();
+        return res.json({
+          clubs: clubs.map(c => c.name),
+          nationalities: nations.map(n => n.name)
+        });
+      }
+    }
 
     await conn.end();
-
-    res.json({
-      clubs: clubs.map(c => c.name),
-      nationalities: nations.map(n => n.name)
+    res.status(400).json({ 
+      error: "No se pudo generar un tablero válido después de 10 intentos" 
     });
+    
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Error generando el tablero" });
+    console.error("Error en generate-board:", err);
+    if (conn) await conn.end();
+    res.status(500).json({ 
+      error: "Error interno del servidor: " + err.message 
+    });
   }
 });
 
-// 2) Endpoint: comprobar el jugador que el usuario propone
 app.post("/check-guess", async (req, res) => {
-  // El body vendrá con: { guess, club, nationality }
-  const { guess, club, nationality } = req.body;
-  if (!guess || !club || !nationality) {
-    return res.status(400).json({ error: "Faltan datos" });
-  }
-
+  const { guess } = req.body;
+  
   try {
     const conn = await mysql.createConnection(dbConfig);
-
-    // Consulta para ver si existe un jugador con ese nombre
-    // que tenga esa nacionalidad y haya jugado en ese club.
-    // Asumiendo tablas: players, clubs, nationalities, player_clubs
-    // Estructura:
-    // players: id, name, nationality_id
-    // clubs: id, name
-    // nationalities: id, name
-    // player_clubs: player_id, club_id
-
-    const sql = `
-      SELECT COUNT(*) AS count
+    
+    const [playerData] = await conn.execute(`
+      SELECT c.name AS club, n.name AS nationality
       FROM players p
       JOIN nationalities n ON n.id = p.nationality_id
       JOIN player_clubs pc ON pc.player_id = p.id
       JOIN clubs c ON c.id = pc.club_id
       WHERE p.name = ?
-        AND n.name = ?
-        AND c.name = ?
-    `;
-    const [rows] = await conn.execute(sql, [guess, nationality, club]);
-    await conn.end();
+    `, [guess]);
 
-    // Si count > 0, el jugador cumple las condiciones
-    if (rows[0].count > 0) {
-      return res.json({ success: true, message: "¡Acierto!" });
-    } else {
-      return res.json({ success: false, message: "No cumple requisitos" });
-    }
+    await conn.end();
+    
+    const playerCombinations = playerData.map(p => 
+      `${p.club}|${p.nationality}`
+    );
+
+    res.json({
+      validCombinations: playerCombinations,
+      message: playerCombinations.length > 0 ? 
+               "¡Jugador válido!" : "No cumple los requisitos"
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Error verificando el jugador" });
+    res.status(500).json({ error: "Error en la verificación" });
   }
 });
 
-// 3) Iniciar servidor
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+app.get("/search-players", async (req, res) => {
+  const query = req.query.query;
+  if (!query) return res.json([]);
+
+  try {
+    const conn = await mysql.createConnection(dbConfig);
+    const [rows] = await conn.execute(
+      "SELECT name FROM players WHERE name LIKE ? LIMIT 10",
+      [`%${query}%`]
+    );
+    await conn.end();
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: "Error en la búsqueda" });
+  }
+});
+
+app.listen(3000, () => {
+  console.log("Servidor escuchando en http://localhost:3000");
 });

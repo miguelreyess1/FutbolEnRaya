@@ -1,118 +1,150 @@
-const API_URL = "http://localhost:3000"; // Ajusta si usas otro puerto
-
-// Variable para saber qué celda está "activa" en este momento
+// main.js
+const API_URL = "http://localhost:3000";
 let selectedCell = null;
 
-document.getElementById("btnGenerate").addEventListener("click", generateBoard);
+// Elementos del DOM
+const btnGenerate = document.getElementById("btnGenerate");
+const btnGuess = document.getElementById("btnGuess");
+const guessInput = document.getElementById("guessInput");
+const suggestionsDiv = document.getElementById("suggestions");
+const buscadorDiv = document.getElementById("buscador");
+const tableroDiv = document.getElementById("tablero");
 
-// Botón "OK" del buscador
-document.getElementById("btnGuess").addEventListener("click", doGuess);
+// Listeners
+btnGenerate.addEventListener("click", generateBoard);
+btnGuess.addEventListener("click", doGuess);
+guessInput.addEventListener("input", onGuessInput);
 
 async function generateBoard() {
-  // 1) Pedir datos al backend
-  const resp = await fetch(`${API_URL}/generate-board`);
-  const data = await resp.json();
-  const { clubs, nationalities } = data;
+  try {
+    const resp = await fetch(`${API_URL}/generate-board`);
+    
+    if (!resp.ok) {
+      const error = await resp.json();
+      alert(error.error || "Error generando tablero");
+      return;
+    }
 
-  // 2) Crear tabla
-  const table = document.createElement("table");
-  const tbody = document.createElement("tbody");
+    const data = await resp.json();
+    const { clubs, nationalities } = data;
 
-  // Fila de encabezados (nacionalidades)
-  const headerRow = document.createElement("tr");
-  // Celda vacía
-  const emptyTh = document.createElement("th");
-  emptyTh.textContent = "";
-  headerRow.appendChild(emptyTh);
+    // Limpiar tablero anterior
+    tableroDiv.innerHTML = "";
 
-  // Cabeceras de columna
-  nationalities.forEach(n => {
-    const th = document.createElement("th");
-    th.textContent = n;
-    headerRow.appendChild(th);
-  });
-  tbody.appendChild(headerRow);
+    // Crear elementos de la tabla
+    const table = document.createElement("table");
+    const tbody = document.createElement("tbody");
 
-  // Filas de clubs
-  clubs.forEach(club => {
-    const row = document.createElement("tr");
+    // Cabeceras nacionalidades
+    const headerRow = document.createElement("tr");
+    headerRow.appendChild(createHeaderCell(""));
+    nationalities.forEach(nat => headerRow.appendChild(createHeaderCell(nat)));
+    tbody.appendChild(headerRow);
 
-    // Celda de encabezado (club)
-    const clubTh = document.createElement("th");
-    clubTh.textContent = club;
-    row.appendChild(clubTh);
+    // Filas de clubs
+    clubs.forEach(club => {
+      const row = document.createElement("tr");
+      row.appendChild(createHeaderCell(club));
 
-    // Celdas jugables
-    nationalities.forEach(nat => {
-      const cell = document.createElement("td");
-      cell.textContent = "Click here";
-      // Guardamos la info en data-attributes
-      cell.dataset.club = club;
-      cell.dataset.nationality = nat;
-
-      // Al hacer clic en la celda => seleccionamos esa celda
-      cell.addEventListener("click", () => {
-        selectedCell = cell; // guardamos la referencia
-        // Mostramos el buscador
-        document.getElementById("buscador").style.display = "block";
-        // Limpiamos el input
-        document.getElementById("guessInput").value = "";
-        // Enfocamos el input para que el usuario empiece a escribir
-        document.getElementById("guessInput").focus();
+      nationalities.forEach(nat => {
+        const cell = document.createElement("td");
+        cell.dataset.club = club;
+        cell.dataset.nationality = nat;
+        
+        // Celda vacía con placeholder mediante CSS
+        cell.classList.add("empty-cell");
+        
+        cell.addEventListener("click", () => {
+          if (!cell.classList.contains("filled")) {
+            selectedCell = cell;
+            buscadorDiv.style.display = "block";
+            guessInput.value = "";
+            guessInput.focus();
+          }
+        });
+        
+        row.appendChild(cell);
       });
-
-      row.appendChild(cell);
+      tbody.appendChild(row);
     });
 
-    tbody.appendChild(row);
-  });
-
-  table.appendChild(tbody);
-
-  // Insertar la tabla en #tablero
-  const tableroDiv = document.getElementById("tablero");
-  tableroDiv.innerHTML = ""; // Limpia anterior
-  tableroDiv.appendChild(table);
-
-  // Ocultamos el buscador hasta que se clique en una celda
-  document.getElementById("buscador").style.display = "none";
+    table.appendChild(tbody);
+    tableroDiv.appendChild(table);
+    buscadorDiv.style.display = "none";
+  } catch (err) {
+    alert("Error de conexión con el servidor");
+  }
 }
 
-// Función que se llama al pulsar "OK" en el buscador
+async function onGuessInput() {
+  const query = guessInput.value.trim();
+  suggestionsDiv.innerHTML = "";
+
+  if (query.length < 2) return;
+
+  try {
+    const resp = await fetch(`${API_URL}/search-players?query=${encodeURIComponent(query)}`);
+    const data = await resp.json();
+
+    data.forEach(player => {
+      const item = document.createElement("div");
+      item.textContent = player.name;
+      item.addEventListener("click", () => {
+        guessInput.value = player.name;
+        suggestionsDiv.innerHTML = "";
+      });
+      suggestionsDiv.appendChild(item);
+    });
+  } catch (error) {
+    console.error("Error buscando jugadores:", error);
+  }
+}
+
 async function doGuess() {
-  if (!selectedCell) {
-    // No hay ninguna celda seleccionada
-    return;
+  if (!selectedCell || !guessInput.value.trim()) return;
+
+  try {
+    const resp = await fetch(`${API_URL}/check-guess`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ guess: guessInput.value.trim() })
+    });
+    
+    const data = await resp.json();
+
+    if (data.validCombinations.length > 0) {
+      // Actualizar todas las celdas válidas
+      data.validCombinations.forEach(combination => {
+        const [club, nationality] = combination.split('|');
+        const cells = document.querySelectorAll(
+          `td[data-club="${club}"][data-nationality="${nationality}"]`
+        );
+
+        cells.forEach(cell => {
+          if (!cell.classList.contains("filled")) {
+            cell.innerHTML = guessInput.value.trim();
+            cell.classList.add("filled");
+            cell.style.backgroundColor = "#c8e6c9";
+          }
+        });
+      });
+    } else {
+      alert("Jugador no válido para ninguna combinación");
+    }
+
+    // Resetear interfaz
+    buscadorDiv.style.display = "none";
+    selectedCell = null;
+    guessInput.value = "";
+    suggestionsDiv.innerHTML = "";
+  } catch (err) {
+    console.error("Error en doGuess:", err);
   }
+}
 
-  const guessInput = document.getElementById("guessInput");
-  const guess = guessInput.value.trim();
-  if (!guess) return; // si está vacío, no hacemos nada
-
-  // Tomamos los data-attributes de la celda
-  const club = selectedCell.dataset.club;
-  const nationality = selectedCell.dataset.nationality;
-
-  // Petición POST /check-guess
-  const resp = await fetch(`${API_URL}/check-guess`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ guess, club, nationality })
-  });
-  const data = await resp.json();
-
-  // Si acierta => ponemos el nombre en la celda
-  if (data.success) {
-    selectedCell.textContent = guess;
-    // (Opcional) Deshabilitar la celda para que no se vuelva a pulsar
-    selectedCell.style.cursor = "default";
-    selectedCell.removeEventListener("click", () => {});
-  } else {
-    // Si no acierta, no hacemos nada, o podrías poner un pequeño mensaje
-    console.log("No cumple requisitos");
-  }
-
-  // Ocultamos el buscador y reseteamos la variable
-  document.getElementById("buscador").style.display = "none";
-  selectedCell = null;
+// Funciones auxiliares
+function createHeaderCell(content) {
+  const th = document.createElement("th");
+  th.textContent = content;
+  return th;
 }

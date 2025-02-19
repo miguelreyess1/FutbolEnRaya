@@ -25,11 +25,49 @@ h1 {
   text-align: center;
 }
 
+/* Añadir a styles.css */
 table {
-  margin: 0 auto;
-  border-collapse: collapse;
-  width: 100%;
-  max-width: 600px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+td {
+  min-width: 100px;
+  height: 80px;
+  border: 1px solid #ccc;
+  position: relative;
+  cursor: pointer;
+}
+
+td.empty-cell:empty::before {
+  content: "CHOOSE PLAYER";
+  color: #ccc;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+td.filled {
+  background-color: #c8e6c9 !important;
+  cursor: default;
+}
+td:hover {
+  background-color: #f8f8f8;
+}
+
+td::after {
+  content: "CHOOSE PLAYER";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ccc;
+  pointer-events: none;
+}
+
+td:not(:empty)::after {
+  display: none;
 }
 
 th, td {
@@ -59,4 +97,23 @@ th, td {
   padding: 6px 12px;
   cursor: pointer;
   font-size: 1rem;
+}
+
+/* Contenedor de sugerencias */
+.suggestions {
+  position: relative;
+  margin-top: 5px;
+  background: #fff;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+/* Cada item de sugerencia */
+.suggestions div {
+  padding: 8px;
+  cursor: pointer;
+}
+.suggestions div:hover {
+  background-color: #f0f0f0;
 }

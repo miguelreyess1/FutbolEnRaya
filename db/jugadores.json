@@ -1,23 +1,9 @@
 [
   {
-    "name": "Koke",
-    "nationality": "España",
+    "name": "Jules Kounde",
+    "nationality": "Francia",
     "clubs": [
-      "Atlético Madrid"
-    ]
-  },
-  {
-    "name": "Samuel Lino",
-    "nationality": "Brasil",
-    "clubs": [
-      "Atlético Madrid"
-    ]
-  },
-  {
-    "name": "Pablo Barrios",
-    "nationality": "España",
-    "clubs": [
-      "Atlético Madrid"
+      "FC Barcelona", "Sevilla"
     ]
   }
 ]
