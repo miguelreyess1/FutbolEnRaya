@@ -1,48 +1,359 @@
 [
   {
-    "name": "Sergio Ramos",
-    "nationality": "Spain",
+    "name": "Lamine Yamal",
+    "nationality": "España",
     "clubs": [
-      "Sevilla",
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Robert Lewandowski",
+    "nationality": "Polonia",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Ansu Fati",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Ferran Torres",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Pau Torres",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Raphina",
+    "nationality": "Brasil",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Pedri",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Frenkie de Jong",
+    "nationality": "Holanda",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Dani Olmo",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Gavi",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Fermin Lopez",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Marc Casadó",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Pablo Torre",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Marc Bernal",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Ronald Araujo",
+    "nationality": "Uruguay",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Jules Koundé",
+    "nationality": "Francia",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Pau Cubarsi",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Alejandro Balde",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Andreas Cristensen",
+    "nationality": "Dinamarca",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Iñigo Martínez",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Hector Fort",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Eric García",
+    "nationality": "Dinamarca",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Gerard Martín",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Marc-André Ter Stegen",
+    "nationality": "Alemania",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Wojciech Szczęsny",
+    "nationality": "Polonia",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Eric García",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Iñaki Peña",
+    "nationality": "España",
+    "clubs": [
+      "FC Barcelona"
+    ]
+  },
+  {
+    "name": "Kylian Mbappe",
+    "nationality": "Francia",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Vinicius Jr",
+    "nationality": "Brasil",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Rodrygo Goes",
+    "nationality": "Brasil",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Jude Bellingham",
+    "nationality": "Inglaterra",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Endrick",
+    "nationality": "Brasil",
+    "clubs": [
       "Real Madrid"
     ]
   },
   {
     "name": "Luka Modric",
-    "nationality": "Croatia",
+    "nationality": "Croacia",
     "clubs": [
       "Real Madrid"
     ]
   },
   {
-    "name": "Antoine Griezmann",
-    "nationality": "France",
-    "clubs": [
-      "Real Sociedad",
-      "Atletico Madrid",
-      "FC Barcelona"
-    ]
-  },
-  {
-    "name": "Dani Carvajal",
-    "nationality": "Spain",
+    "name": "Arda Guler",
+    "nationality": "Turquia",
     "clubs": [
       "Real Madrid"
     ]
   },
   {
-    "name": "Lamine Yamal",
-    "nationality": "Spain",
+    "name": "Federico Valverde",
+    "nationality": "Uruguay",
     "clubs": [
-      "FC Barcelona"
+      "Real Madrid"
     ]
   },
   {
-    "name": "Clement Lenglet",
-    "nationality": "France",
+    "name": "Eduardo Camavinga",
+    "nationality": "Francia",
     "clubs": [
-      "Atletico Madrid",
-      "FC Barcelona"
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Brahim Díaz",
+    "nationality": "Marruecos",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Daniel Ceballos",
+    "nationality": "España",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Antonio Rüdiger",
+    "nationality": "Alemania",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Aurélien Tchouaméni",
+    "nationality": "Francia",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Daniel Carvajal",
+    "nationality": "España",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Eder Militao",
+    "nationality": "Brasil",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "David Alaba",
+    "nationality": "Austria",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Ferland Mendy",
+    "nationality": "Francia",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Lucas Vázquez",
+    "nationality": "España",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Thibaut Courtois",
+    "nationality": "Bélgica",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Jesús Vallejo",
+    "nationality": "España",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Raúl Asencio",
+    "nationality": "España",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Fran García",
+    "nationality": "España",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Andriy Lunin",
+    "nationality": "Ucrania",
+    "clubs": [
+      "Real Madrid"
+    ]
+  },
+  {
+    "name": "Julián Álvarez",
+    "nationality": "Argentina",
+    "clubs": [
+      "Atlético Madrid"
     ]
   }
 ]

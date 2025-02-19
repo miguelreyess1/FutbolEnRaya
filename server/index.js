@@ -8,7 +8,7 @@ const dbConfig = {
   host: "localhost",
   user: "root",
   password: "root",       // tu password, si corresponde
-  database: "TikiTakaDB"
+  database: "futbolenraya"
 };
 
 const app = express();

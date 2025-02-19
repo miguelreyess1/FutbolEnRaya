@@ -43,4 +43,3 @@ UNIQUE (name, nationality_id);
 select * from players;
 select * from clubs;
 select * from nationalities;
-
