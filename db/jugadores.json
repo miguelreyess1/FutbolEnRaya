@@ -1,23 +1,23 @@
 [
   {
-    "name": "Loic Bade",
-    "nationality": "Francia",
+    "name": "Samu Costa",
+    "nationality": "Portugal",
     "clubs": [
-      "Sevilla"
+      "Mallorca", "Almeria"
     ]
   },
   {
-    "name": "Isco",
+    "name": "Sergi Darder",
     "nationality": "España",
     "clubs": [
-      "Sevilla", "Real Madrid", "Betis"
+      "Mallorca", "Espanyol", "Malaga"
     ]
   },
   {
-    "name": "Dodi Lukebakio",
-    "nationality": "Belgica",
+    "name": "Dani Rodriguez",
+    "nationality": "España",
     "clubs": [
-      "Sevilla"
+      "Mallorca", "Albacete", "Racing Santander", "Racing Ferrol"
     ]
   }
 ]

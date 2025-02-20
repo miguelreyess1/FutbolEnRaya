@@ -40,12 +40,6 @@ ALTER TABLE players
 ADD CONSTRAINT unique_player_name_nationality
 UNIQUE (name, nationality_id);
 
-SELECT COUNT(*) FROM players;
-SELECT COUNT(*) FROM clubs;
-SELECT COUNT(*) FROM nationalities;
-SELECT COUNT(*) FROM player_clubs;
-
-use futbolenraya;
 UPDATE players
 SET nationality_id = (
   SELECT id FROM nationalities WHERE name = 'Spain'

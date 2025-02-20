@@ -90,7 +90,8 @@ const mysql = require("mysql2/promise");
     }
 
     // 5) Guardar fullDB actualizado
-    fs.writeFileSync("fullDB.json", JSON.stringify(fullDB, null, 2));
+    const jsonConFormato = "[\n" + fullDB.map(jugador => JSON.stringify(jugador)).join(",\n") + "\n]";
+    fs.writeFileSync("fullDB.json", jsonConFormato);    
     console.log("Importación finalizada. fullDB.json actualizado.");
 
     await connection.end();

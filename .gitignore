@@ -11,3 +11,4 @@ node_modules/
 # git add .
 # git commit -m "Descripción del cambio"
 # git push
+#  & "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysqldump.exe" -u root -proot futbolenraya > "E:\FutbolEnRayaDB\backup_futbolenraya_$(Get-Date -Format 'yyyyMMdd').sql"
