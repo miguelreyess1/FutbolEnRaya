@@ -1,9 +1,23 @@
 [
   {
-    "name": "Jules Kounde",
+    "name": "Loic Bade",
     "nationality": "Francia",
     "clubs": [
-      "FC Barcelona", "Sevilla"
+      "Sevilla"
+    ]
+  },
+  {
+    "name": "Isco",
+    "nationality": "España",
+    "clubs": [
+      "Sevilla", "Real Madrid", "Betis"
+    ]
+  },
+  {
+    "name": "Dodi Lukebakio",
+    "nationality": "Belgica",
+    "clubs": [
+      "Sevilla"
     ]
   }
 ]
