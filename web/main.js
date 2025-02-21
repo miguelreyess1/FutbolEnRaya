@@ -1,5 +1,4 @@
-// main.js
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:3001";
 
 // Variables de turno
 let currentPlayer = 1;  // Empieza el jugador 1
@@ -36,51 +35,46 @@ guessInput.addEventListener("input", onGuessInput);
  */
 async function generateBoard() {
   try {
+    console.log("Solicitando generación del tablero...");
     const resp = await fetch(`${API_URL}/generate-board`);
     if (!resp.ok) {
-      // Error devuelto por el servidor
       const error = await resp.json();
+      console.error("Error en la respuesta del servidor:", error);
       alert(error.error || "Error generando tablero");
       return;
     }
 
     const data = await resp.json();
-    const { clubs, nationalities } = data;
+    console.log("Tablero recibido:", data);
+    const { rows: clubs, cols: nationalities } = data; // Actualizado para coincidir con la respuesta del servidor
 
-    // Limpiar tablero anterior
+    console.log("Limpiando tablero anterior...");
     tableroDiv.innerHTML = "";
 
-    // Crear la tabla
+    console.log("Creando nuevo tablero...");
     const table = document.createElement("table");
     const tbody = document.createElement("tbody");
 
     // Fila de encabezados (nacionalidades)
     const headerRow = document.createElement("tr");
-    // Celda vacía (esquina superior izquierda)
     headerRow.appendChild(createHeaderCell(""));
-    // Encabezados de columna con las nacionalidades
     nationalities.forEach(n => {
-      headerRow.appendChild(createHeaderCell(n));
+      headerRow.appendChild(createHeaderCell(n.name)); // Usar n.name en lugar de n
     });
     tbody.appendChild(headerRow);
 
     // Filas (clubs)
     clubs.forEach(club => {
       const row = document.createElement("tr");
-      // Primera celda de la fila: el nombre del club
-      row.appendChild(createHeaderCell(club));
+      row.appendChild(createHeaderCell(club.name)); // Usar club.name en lugar de club
 
-      // Celdas del 3x3
       nationalities.forEach(nat => {
         const cell = document.createElement("td");
-        cell.dataset.club = club;
-        cell.dataset.nationality = nat;
-        // Clase para el placeholder "CHOOSE PLAYER"
+        cell.dataset.club = club.name; // Usar club.name en lugar de club
+        cell.dataset.nationality = nat.name; // Usar nat.name en lugar de nat
         cell.classList.add("empty-cell");
 
-        // Al hacer clic en la celda, abrimos el buscador
         cell.addEventListener("click", () => {
-          // Solo si la celda no está ya rellenada
           if (!cell.classList.contains("filled")) {
             selectedCell = cell;
             buscadorDiv.style.display = "block";
@@ -98,9 +92,10 @@ async function generateBoard() {
     table.appendChild(tbody);
     tableroDiv.appendChild(table);
 
-    // Ocultamos el buscador
+    console.log("Tablero generado con éxito.");
     buscadorDiv.style.display = "none";
   } catch (err) {
+    console.error("Error de conexión con el servidor:", err);
     alert("Error de conexión con el servidor");
   }
 }
@@ -153,7 +148,7 @@ async function doGuess() {
     });
     const data = await resp.json();
 
-    // data.validCombinations es un array como ["Real Madrid|Spain", ...]
+    // data.validCombinations es un array como ["Real Madrid|Spain", "Barcelona|Valencia", ...]
     if (data.validCombinations.includes(selectedCombination)) {
       // Acierto
       selectedCell.textContent = guess;

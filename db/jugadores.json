@@ -1,23 +1,9 @@
 [
   {
-    "name": "Samu Costa",
-    "nationality": "Portugal",
-    "clubs": [
-      "Mallorca", "Almeria"
-    ]
-  },
-  {
-    "name": "Sergi Darder",
+    "name": "Isco",
     "nationality": "España",
     "clubs": [
-      "Mallorca", "Espanyol", "Malaga"
-    ]
-  },
-  {
-    "name": "Dani Rodriguez",
-    "nationality": "España",
-    "clubs": [
-      "Mallorca", "Albacete", "Racing Santander", "Racing Ferrol"
+      "Betis", "Real Madrid", "Sevilla", "Malaga"
     ]
   }
 ]
