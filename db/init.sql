@@ -64,3 +64,9 @@ WHERE p.name = 'lias Akhomach';
 -- 2) Eliminar al jugador de la tabla players
 DELETE FROM players
 WHERE name = 'lias Akhomach';
+
+USE FutbolEnRaya;
+UPDATE clubs
+SET league = 'España';
+
+
