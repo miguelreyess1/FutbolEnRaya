@@ -30,10 +30,23 @@ JOIN player_clubs pc ON pc.player_id = p.id
 JOIN clubs c ON c.id = pc.club_id
 WHERE p.name = 'Clement Lenglet';
 
--- Añadiir un equipo a un jugador
+-- Añadir un equipo a un jugador
 INSERT INTO player_clubs (player_id, club_id)
 VALUES (
-  (SELECT id FROM players WHERE name = 'Yuri Berchiche'),
-  (SELECT id FROM clubs WHERE name = 'PSG')
+  (SELECT id FROM players WHERE name = 'Toni Lato'),
+  (SELECT id FROM clubs WHERE name = 'PSV')
 );
 
+-- Crear equipo
+USE FutbolEnRaya;
+INSERT INTO clubs (name, league) VALUES
+('PSV', 'Holanda');
+
+-- Crear un jugador
+INSERT INTO players (name, nationality_id)
+SELECT 'Alex Baena', 1
+WHERE NOT EXISTS (
+  SELECT 1 
+  FROM players
+  WHERE name = 'Alex Baena'
+);

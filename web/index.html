@@ -6,15 +6,22 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Tres en Raya con DB</h1>
-    <div id="turno"></div>
-    <button id="btnGenerate">Generar Tablero</button>
-    <div id="tablero"></div>
-    <div id="buscador" style="display: none;">
-      <h3>Escribe el nombre del jugador:</h3>
-      <input type="text" id="guessInput" placeholder="Jugador..." />
-      <button id="btnGuess">OK</button>
-      <div id="suggestions" class="suggestions"></div>
+    <div id="startScreen">
+      <h1>Selecciona modo de juego</h1>
+      <button class="mode-btn" onclick="startGame('todos')">Todos los clubes</button>
+      <button class="mode-btn" onclick="startGame('espana')">Solo Liga Española</button>
+    </div>
+    <div id="gameScreen" style="display: none;">
+      <h1>Tres en Raya con DB</h1>
+      <div id="turno"></div>
+      <button id="btnGenerate">Generar Tablero</button>
+      <div id="tablero"></div>
+      <div id="buscador" style="display: none;">
+        <h3>Escribe el nombre del jugador:</h3>
+        <input type="text" id="guessInput" placeholder="Jugador..." />
+        <button id="btnGuess">OK</button>
+        <div id="suggestions" class="suggestions"></div>
+      </div>
     </div>
     <script src="main.js"></script>    
   </body>

@@ -1,13 +1,14 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "http://localhost:3002";
 
-// Variables de turno
-let currentPlayer = 1;  // Empieza el jugador 1
+// Variables de estado
+let currentPlayer = 1;
 const playerNames = ["Jugador 1", "Jugador 2"];
-
-// Para saber en qué celda se hizo clic
 let selectedCell = null;
+let selectedMode = 'todos';
 
-// Referencias al DOM
+// Elementos DOM
+const startScreen = document.getElementById('startScreen');
+const gameScreen = document.getElementById('gameScreen');
 const turnoDiv = document.getElementById("turno");
 const btnGenerate = document.getElementById("btnGenerate");
 const btnGuess = document.getElementById("btnGuess");
@@ -16,167 +17,152 @@ const suggestionsDiv = document.getElementById("suggestions");
 const buscadorDiv = document.getElementById("buscador");
 const tableroDiv = document.getElementById("tablero");
 
-// Función para mostrar en pantalla de quién es el turno
+// Función para iniciar el juego
+function startGame(mode) {
+  selectedMode = mode;
+  startScreen.style.display = 'none';
+  gameScreen.style.display = 'block';
+  updateTurnDisplay();
+}
+
+// Actualizar display de turno
 function updateTurnDisplay() {
   turnoDiv.textContent = `Turno de: ${playerNames[currentPlayer - 1]}`;
 }
 
-// Al cargar la página, actualizamos el turno
-updateTurnDisplay();
-
-// Listeners
+// Event listeners
 btnGenerate.addEventListener("click", generateBoard);
 btnGuess.addEventListener("click", doGuess);
 guessInput.addEventListener("input", onGuessInput);
 
-/**
- * Llama a /generate-board para obtener 3 clubs y 3 nacionalidades,
- * y construye el tablero 3x3.
- */
+// Generar tablero
 async function generateBoard() {
   try {
-    console.log("Solicitando generación del tablero...");
-    const resp = await fetch(`${API_URL}/generate-board`);
+    const resp = await fetch(`${API_URL}/generate-board?mode=${selectedMode}`);
     if (!resp.ok) {
       const error = await resp.json();
-      console.error("Error en la respuesta del servidor:", error);
       alert(error.error || "Error generando tablero");
       return;
     }
 
     const data = await resp.json();
-    console.log("Tablero recibido:", data);
-    const { rows: clubs, cols: nationalities } = data; // Actualizado para coincidir con la respuesta del servidor
-
-    console.log("Limpiando tablero anterior...");
-    tableroDiv.innerHTML = "";
-
-    console.log("Creando nuevo tablero...");
-    const table = document.createElement("table");
-    const tbody = document.createElement("tbody");
-
-    // Fila de encabezados (nacionalidades)
-    const headerRow = document.createElement("tr");
-    headerRow.appendChild(createHeaderCell(""));
-    nationalities.forEach(n => {
-      headerRow.appendChild(createHeaderCell(n.name)); // Usar n.name en lugar de n
-    });
-    tbody.appendChild(headerRow);
-
-    // Filas (clubs)
-    clubs.forEach(club => {
-      const row = document.createElement("tr");
-      row.appendChild(createHeaderCell(club.name)); // Usar club.name en lugar de club
-
-      nationalities.forEach(nat => {
-        const cell = document.createElement("td");
-        cell.dataset.club = club.name; // Usar club.name en lugar de club
-        cell.dataset.nationality = nat.name; // Usar nat.name en lugar de nat
-        cell.classList.add("empty-cell");
-
-        cell.addEventListener("click", () => {
-          if (!cell.classList.contains("filled")) {
-            selectedCell = cell;
-            buscadorDiv.style.display = "block";
-            guessInput.value = "";
-            guessInput.focus();
-          }
-        });
-
-        row.appendChild(cell);
-      });
-
-      tbody.appendChild(row);
-    });
-
-    table.appendChild(tbody);
-    tableroDiv.appendChild(table);
-
-    console.log("Tablero generado con éxito.");
-    buscadorDiv.style.display = "none";
+    renderBoard(data);
   } catch (err) {
-    console.error("Error de conexión con el servidor:", err);
     alert("Error de conexión con el servidor");
   }
 }
 
-/**
- * Se llama al teclear en guessInput: hace autocompletado llamando a /search-players
- */
+// Renderizar tablero
+function renderBoard(data) {
+  tableroDiv.innerHTML = '';
+  const table = document.createElement("table");
+  const tbody = document.createElement("tbody");
+
+  // Cabeceras
+  const headerRow = document.createElement("tr");
+  headerRow.appendChild(createHeaderCell(""));
+  data.cols.forEach(n => headerRow.appendChild(createHeaderCell(n.name)));
+  tbody.appendChild(headerRow);
+
+  // Filas
+  data.rows.forEach(row => {
+    const tr = document.createElement("tr");
+    tr.appendChild(createHeaderCell(row.name));
+
+    data.cols.forEach(col => {
+      const td = document.createElement("td");
+      td.dataset.club = row.name;
+      td.dataset.nationality = col.name;
+      td.classList.add("empty-cell");
+
+      td.addEventListener("click", () => {
+        if (!td.classList.contains("filled")) {
+          selectedCell = td;
+          buscadorDiv.style.display = "block";
+          guessInput.value = "";
+          guessInput.focus();
+        }
+      });
+
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  table.appendChild(tbody);
+  tableroDiv.appendChild(table);
+  buscadorDiv.style.display = "none";
+}
+
+// Autocompletado
 async function onGuessInput() {
   const query = guessInput.value.trim();
   suggestionsDiv.innerHTML = "";
 
-  // Si el usuario no ha escrito suficiente, no buscamos
   if (query.length < 2) return;
 
   try {
     const resp = await fetch(`${API_URL}/search-players?query=${encodeURIComponent(query)}`);
     const data = await resp.json();
-
-    // Mostrar sugerencias
+    
     data.forEach(player => {
-      const item = document.createElement("div");
-      item.textContent = player.name;
-      item.addEventListener("click", () => {
+      const div = document.createElement("div");
+      div.textContent = player.name;
+      div.onclick = () => {
         guessInput.value = player.name;
         suggestionsDiv.innerHTML = "";
-      });
-      suggestionsDiv.appendChild(item);
+      };
+      suggestionsDiv.appendChild(div);
     });
-  } catch (error) {
-    console.error("Error buscando jugadores:", error);
+  } catch (err) {
+    console.error("Error en búsqueda:", err);
   }
 }
 
-/**
- * Al pulsar "OK" en el buscador: validar la jugada con /check-guess
- */
+// Verificar jugada
 async function doGuess() {
   if (!selectedCell || !guessInput.value.trim()) return;
-
-  const guess = guessInput.value.trim();
-  const club = selectedCell.dataset.club;
-  const nationality = selectedCell.dataset.nationality;
-  const selectedCombination = `${club}|${nationality}`;
 
   try {
     const resp = await fetch(`${API_URL}/check-guess`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ guess })
+      body: JSON.stringify({ guess: guessInput.value.trim() })
     });
+    
     const data = await resp.json();
-
-    // data.validCombinations es un array como ["Real Madrid|Spain", "Barcelona|Valencia", ...]
-    if (data.validCombinations.includes(selectedCombination)) {
-      // Acierto
-      selectedCell.textContent = guess;
-      selectedCell.classList.add("filled");
-      selectedCell.style.backgroundColor = "#c8e6c9";
-      alert(`¡Acierto de ${playerNames[currentPlayer - 1]}!`);
-    } else {
-      // Fallo
-      alert(`Fallo de ${playerNames[currentPlayer - 1]}.`);
-    }
-
-    // Cambiar turno siempre (acierte o falle)
-    currentPlayer = (currentPlayer === 1) ? 2 : 1;
-    updateTurnDisplay();
-
-    // Reset
-    buscadorDiv.style.display = "none";
-    selectedCell = null;
-    guessInput.value = "";
-    suggestionsDiv.innerHTML = "";
+    processGuessResult(data);
   } catch (err) {
-    console.error("Error en doGuess:", err);
+    alert("Error verificando jugada");
   }
 }
 
-/**
- * Crear celdas de encabezado (th) con texto
- */
+// Procesar resultado
+function processGuessResult(data) {
+  const combination = `${selectedCell.dataset.club}|${selectedCell.dataset.nationality}`;
+  
+  if (data.validCombinations.includes(combination)) {
+    selectedCell.textContent = guessInput.value.trim();
+    selectedCell.classList.add("filled");
+    selectedCell.style.backgroundColor = "#c8e6c9";
+    alert(`¡Acierto de ${playerNames[currentPlayer - 1]}!`);
+  } else {
+    alert(`Fallo de ${playerNames[currentPlayer - 1]}`);
+  }
+
+  currentPlayer = currentPlayer === 1 ? 2 : 1;
+  updateTurnDisplay();
+  resetGuessInterface();
+}
+
+function resetGuessInterface() {
+  buscadorDiv.style.display = "none";
+  selectedCell = null;
+  guessInput.value = "";
+  suggestionsDiv.innerHTML = "";
+}
+
 function createHeaderCell(content) {
   const th = document.createElement("th");
   th.textContent = content;
