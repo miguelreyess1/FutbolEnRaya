@@ -1,4 +1,4 @@
-# ⚽ FutbolEnRaya 🎮
+# ⚽ FutbolEnRaya
 
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC_BY--NC--ND_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 ![Project Status](https://img.shields.io/badge/Status-En%20Desarrollo-yellowgreen)
@@ -11,7 +11,7 @@
 | 🎯 Función                  | 📚 Descripción                                                                |
 | --------------------------- | ----------------------------------------------------------------------------- |
 | 🧩 Tablero Dinámico 3x3     | Genera aleatoriamente combinaciones de clubes y nacionalidades                |
-| 🔍 Validación en Tiem Real  | Consulta instantánea a base de datos MySQL con millones de registros          |
+| 🔍 Validación en Tiempo Real  | Consulta instantánea a base de datos MySQL con millones de registros          |
 | 📱 Interfaz Intuitiva       | Búsqueda unificada con autocompletado y sistema de puntuación visual          |
 | 🛠️ Altamente Personalizable | Fácil adaptación para incluir nuevas categorías (ligas, edades, posiciones)   |
 
