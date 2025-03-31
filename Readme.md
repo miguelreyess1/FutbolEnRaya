@@ -90,6 +90,6 @@ Licencia CC
 ## 📞 Contacto
 
 ¿Preguntas o sugerencias?
-✉️ miguel.reyesgomez1@gmail.com
+✉️  miguel.reyesgomez1@gmail.com
 
 ¡Que empiece el juego! ⚽🎉
